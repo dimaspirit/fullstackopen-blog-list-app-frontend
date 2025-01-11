@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogServices from './services/blogs'
 import { login } from './services/login';
+import Notification from './components/Notification';
 
 const App = () => {
   const savedNameStorage = 'loggedBlogappUser';
@@ -13,6 +14,9 @@ const App = () => {
     title: '',
     url: '',
   });
+
+  const [notificationMessage, setNotificationMessage] = useState(null);
+  const [notificationType, setNotificationType] = useState(null);
 
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
@@ -57,8 +61,9 @@ const App = () => {
         ...blogs,
         blog,
       ]
-    )
-
+    );
+    setNotificationMessage(`Added new blog: ${blog.title} by ${blog.author}`);
+    setTimeout(() => setNotificationMessage(null), 5000);
   }
 
   useEffect(() => {
@@ -86,6 +91,7 @@ const App = () => {
 
         <div>
           <h2>Create a new blog</h2>
+          {notificationMessage && <Notification message={notificationMessage} />}
           <form onSubmit={handleCreateBlog}>
             <div>
               <label htmlFor="author">Author</label>
@@ -121,7 +127,7 @@ const App = () => {
       <>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          {loginError && <p style={{color: 'red'}}>{loginError}</p>}
+          {loginError && <Notification type={"error"} message={loginError} /> }
 
           <div>
             <label htmlFor="username">Username</label>

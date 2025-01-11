@@ -1,0 +1,13 @@
+.notification {
+  padding: 20px;
+}
+
+.success {
+  color: green;
+  background-color: rgba(0, 255, 0, .1);
+}
+
+.error {
+  color: red;
+  background-color: rgba(255, 0, 0, .1);
+}
