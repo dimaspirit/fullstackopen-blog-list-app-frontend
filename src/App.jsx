@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import { login } from './services/login';
 
 const App = () => {
+  const savedNameStorage = 'loggedBlogappUser';
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,6 +18,7 @@ const App = () => {
     try {
       const user = await login({username, password});
       setUser(user);
+      window.localStorage.setItem(savedNameStorage, JSON.stringify(user));
 
       setUsername('');
       setPassword('');
@@ -26,6 +28,20 @@ const App = () => {
     }
   }
 
+  const handleLogout = () => {
+    setBlogs([]);
+    setUser(null);
+    window.localStorage.clear();
+  }
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem(savedNameStorage);
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+    }
+  }, [])
+
   useEffect(() => {
     if(user) {
       blogService.getAll().then(blogs => setBlogs( blogs ))
@@ -34,12 +50,19 @@ const App = () => {
 
   if(user) {
     return (
-      <div>
-        <h2>blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )}
-      </div>
+      <>
+        <div>
+          <p>{user.username}</p>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+
+        <div>
+          <h2>blogs</h2>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+      </>
     )
   }
 
