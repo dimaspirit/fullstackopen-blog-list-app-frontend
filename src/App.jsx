@@ -11,12 +11,6 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const [newBlog, setNewBlog] = useState({
-    author: '',
-    title: '',
-    url: '',
-  });
-
   const [notificationMessage, setNotificationMessage] = useState(null);
   const [notificationType, setNotificationType] = useState(null);
 
@@ -47,23 +41,9 @@ const App = () => {
     window.localStorage.clear();
   }
 
-  const handleNewBlogProp = (name, value) => {
-    setNewBlog({
-      ...newBlog,
-      [name]: value,
-    });
-  }
-
-  const handleCreateBlog = async (e) => {
-    e.preventDefault();
-
+  const createBlog = async (newBlog) => {
     const blog = await blogServices.create(newBlog);
-    setBlogs(
-      [
-        ...blogs,
-        blog,
-      ]
-    );
+    setBlogs([...blogs, blog]);
     setNotificationMessage(`Added new blog: ${blog.title} by ${blog.author}`);
     setTimeout(() => setNotificationMessage(null), 5000);
   }
@@ -92,7 +72,7 @@ const App = () => {
         </div>
 
         <Togglable buttonLabel="new note">
-          <BlogForm newBlog={newBlog} handleUpdate={handleNewBlogProp} onSubmit={handleCreateBlog} />
+          <BlogForm onSubmit={createBlog} />
         </Togglable>
 
 
