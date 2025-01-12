@@ -3,6 +3,8 @@ import Blog from './components/Blog'
 import blogServices from './services/blogs'
 import { login } from './services/login';
 import Notification from './components/Notification';
+import BlogForm from './components/BlogForm';
+import Togglable from './components/Togglable.jsx';
 
 const App = () => {
   const savedNameStorage = 'loggedBlogappUser';
@@ -89,7 +91,12 @@ const App = () => {
           <button onClick={handleLogout}>Logout</button>
         </div>
 
-        <div>
+        <Togglable buttonLabel="new note">
+          <BlogForm newBlog={newBlog} handleUpdate={handleNewBlogProp} onSubmit={handleCreateBlog} />
+        </Togglable>
+
+
+        {/* <div>
           <h2>Create a new blog</h2>
           {notificationMessage && <Notification message={notificationMessage} />}
           <form onSubmit={handleCreateBlog}>
@@ -110,7 +117,7 @@ const App = () => {
 
             <button type="submit">Added new blog</button>
           </form>
-        </div>
+        </div> */}
 
         <div>
           <h2>blogs</h2>
