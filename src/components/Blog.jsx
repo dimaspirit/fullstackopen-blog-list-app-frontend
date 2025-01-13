@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, onUpdate }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -12,6 +12,10 @@ const Blog = ({ blog }) => {
   const [isFullDescriptionShown, setIsFullDescriptionShown] = useState(false);
   const buttonLabel = isFullDescriptionShown ? 'hide' : 'show';
 
+  const handleUpdateLikes = () => {
+    onUpdate(blog.id, { likes: blog.likes+1 });
+  }
+
   return (
     <div style={blogStyle}>
       <h3>
@@ -21,7 +25,7 @@ const Blog = ({ blog }) => {
 
       <div style={{display: isFullDescriptionShown ? 'block': 'none'}}>
         <p>{blog.url}</p>
-        <p>likes: {blog.likes}</p>
+        <p>likes: {blog.likes} <button onClick={handleUpdateLikes}>Like</button></p>
         <p>{blog.author}</p>
       </div> 
     </div>
