@@ -59,6 +59,11 @@ const App = () => {
     setBlogs(blogsUpdated.sort((a, b) => b.likes - a.likes));
   }
 
+  const handleDelete = async(id) => {
+    await blogServices.remove(id);
+    setBlogs(blogs.filter(blog => blog.id !== id));
+  }
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem(savedNameStorage);
     if (loggedUserJSON) {
@@ -89,7 +94,7 @@ const App = () => {
         <div>
           <h2>blogs</h2>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} onUpdate={handleUpdate}  />
+            <Blog key={blog.id} blog={blog} onUpdate={handleUpdate} onDelete={handleDelete} />
           )}
         </div>
       </>
