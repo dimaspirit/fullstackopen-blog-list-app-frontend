@@ -56,7 +56,7 @@ const App = () => {
       else return blog;
     });
 
-    setBlogs(blogsUpdated);
+    setBlogs(blogsUpdated.sort((a, b) => b.likes - a.likes));
   }
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const App = () => {
 
   useEffect(() => {
     if(user) {
-      blogServices.getAll().then(blogs => setBlogs( blogs ))
+      blogServices.getAll().then(blogs => setBlogs(blogs.sort((a, b) => b.likes - a.likes)));
     }
   }, [user]);
 
