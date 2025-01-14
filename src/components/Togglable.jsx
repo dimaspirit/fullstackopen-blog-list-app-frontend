@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const Togglable = ({buttonLabel, children}) => {
+const Togglable = ({ buttonLabel, children }) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -17,11 +18,19 @@ const Togglable = ({buttonLabel, children}) => {
       </div>
 
       <div style={showWhenVisible}>
-        {children}
+        { children }
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
   )
 }
+
+
+Togglable.displayName = 'Togglable'
+
+Togglable.propTypes = {
+  buttonLabel: PropTypes.string.isRequired,
+}
+
 
 export default Togglable

@@ -1,33 +1,33 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-const BlogForm = ({onSubmit}) => {
+const BlogForm = ({ onSubmit }) => {
   const initValues = {
     author: '',
     title: '',
     url: '',
-  };
+  }
 
-  const [newBlog, setNewBlog] = useState(initValues);
+  const [newBlog, setNewBlog] = useState(initValues)
 
   const handleUpdate = (name, value) => {
     setNewBlog({
       ...newBlog,
       [name]: value,
-    });
+    })
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    onSubmit(newBlog);
-    setNewBlog({...initValues})
+    onSubmit(newBlog)
+    setNewBlog({ ...initValues })
   }
 
   return (
     <>
       <h2>Create a new blog</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={ handleSubmit }>
         <div>
           <label htmlFor="author">Author</label>
           <input id="author" name="author" type="text" value={newBlog.author} onChange={(e) => handleUpdate('author', e.target.value)} required />
@@ -49,4 +49,4 @@ const BlogForm = ({onSubmit}) => {
   )
 }
 
-export default BlogForm;
+export default BlogForm
