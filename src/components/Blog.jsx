@@ -21,11 +21,11 @@ const Blog = ({ blog, onUpdate, onDelete }) => {
   return (
     <div style={blogStyle}>
       <h3>
-        {blog.title}
+        <p id="blog-title">{`${blog.title} by ${blog.author}`}</p>
         <button onClick={() => setIsFullDescriptionShown(!isFullDescriptionShown)}>{buttonLabel}</button>
       </h3>
 
-      <div style={{ display: isFullDescriptionShown ? 'block': 'none' }}>
+      <div id="blog-description" style={{ display: isFullDescriptionShown ? 'block': 'none' }}>
         <p>{blog.url}</p>
         <p>likes: {blog.likes} <button onClick={handleUpdateLikes}>Like</button></p>
         <p>{blog.author}</p>
