@@ -29,18 +29,18 @@ const BlogForm = ({ onSubmit }) => {
 
       <form onSubmit={ handleSubmit }>
         <div>
-          <label htmlFor="author">Author</label>
-          <input id="author" name="author" type="text" value={newBlog.author} onChange={(e) => handleUpdate('author', e.target.value)} required />
+          <label htmlFor="blog-form-author">Author</label>
+          <input id="blog-form-author" name="blog-form-author" type="text" value={newBlog.author} onChange={(e) => handleUpdate('author', e.target.value)} required />
         </div>
 
         <div>
-          <label htmlFor="title">Title</label>
-          <input id="title" name="title" type="text" value={newBlog.title} onChange={(e) => handleUpdate('title', e.target.value)} required />
+          <label htmlFor="blog-form-title">Title</label>
+          <input id="blog-form-title" name="blog-form-title" type="text" value={newBlog.title} onChange={(e) => handleUpdate('title', e.target.value)} required />
         </div>
 
         <div>
-          <label htmlFor="url">Url</label>
-          <input id="url" name="url" type="text" value={newBlog.url} onChange={(e) => handleUpdate('url', e.target.value)} required />
+          <label htmlFor="blog-form-url">Url</label>
+          <input id="blog-form-url" name="blog-form-url" type="text" value={newBlog.url} onChange={(e) => handleUpdate('url', e.target.value)} required />
         </div>
 
         <button type="submit">Added new blog</button>
