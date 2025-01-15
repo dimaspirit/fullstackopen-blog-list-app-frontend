@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 import { describe } from 'vitest'
 
@@ -38,4 +39,14 @@ describe('<Blog />', () => {
     const descriptionEl = container.querySelector('#blog-description')
     expect(descriptionEl).toHaveStyle('display: none')
   })
+
+  test('after clicking the button, details are displayed', async () => {
+    const user = userEvent.setup()
+    const buttonEl = screen.getByText('show')
+    await user.click(buttonEl)
+
+    const detailsEl = container.querySelector('#blog-description')
+    expect(detailsEl).not.toHaveStyle('display: none')
+  })
+
 })

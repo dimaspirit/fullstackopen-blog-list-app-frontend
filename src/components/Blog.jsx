@@ -28,7 +28,6 @@ const Blog = ({ blog, onUpdate, onDelete }) => {
       <div id="blog-description" style={{ display: isFullDescriptionShown ? 'block': 'none' }}>
         <p>{blog.url}</p>
         <p>likes: {blog.likes} <button onClick={handleUpdateLikes}>Like</button></p>
-        <p>{blog.author}</p>
 
         {isCreatedByUser && <button onClick={() => onDelete(blog.id)}>Delete</button>}
       </div>
