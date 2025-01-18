@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const Blog = ({ blog, onUpdate, onDelete }) => {
+const Blog = ({ blog, currentUserId, onUpdate, onDelete }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -12,7 +12,8 @@ const Blog = ({ blog, onUpdate, onDelete }) => {
 
   const [isFullDescriptionShown, setIsFullDescriptionShown] = useState(false)
   const buttonLabel = isFullDescriptionShown ? 'hide' : 'show'
-  const isCreatedByUser = blog.user?.blogs.some(blogId => blogId === blog.id)
+
+  const isCreatedByUser = blog.user?.id === currentUserId
 
   const handleUpdateLikes = () => {
     onUpdate(blog.id, { likes: blog.likes+1 })

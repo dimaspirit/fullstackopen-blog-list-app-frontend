@@ -87,14 +87,14 @@ const App = () => {
           <button onClick={handleLogout}>Logout</button>
         </div>
 
-        <Togglable buttonLabel="new note">
+        <Togglable buttonLabel="new blog">
           <BlogForm onSubmit={createBlog} />
         </Togglable>
 
         <div>
           <h2>blogs</h2>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} onUpdate={handleUpdate} onDelete={handleDelete} />
+            <Blog key={blog.id} blog={blog} currentUserId={user.id} onUpdate={handleUpdate} onDelete={handleDelete} />
           )}
         </div>
       </>
@@ -110,12 +110,12 @@ const App = () => {
 
           <div>
             <label htmlFor="username">Username</label>
-            <input id="username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            <input id="username" name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <input id="password" name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
           </div>
 
           <div>
