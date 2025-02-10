@@ -18,7 +18,7 @@ const App = () => {
   const [loginError, setLoginError] = useState(null)
   const [blogs, setBlogs] = useState([])
 
-  const handleLogin =  async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
 
     try {
@@ -48,20 +48,20 @@ const App = () => {
     setTimeout(() => setNotificationMessage(null), 5000)
   }
 
-  const handleUpdate = async(id, data) => {
+  const handleUpdate = async (id, data) => {
     const blogUpdated = await blogServices.update(id, data)
 
-    const blogsUpdated = blogs.map(blog => {
-      if(blog.id === blogUpdated.id) return blogUpdated
+    const blogsUpdated = blogs.map((blog) => {
+      if (blog.id === blogUpdated.id) return blogUpdated
       else return blog
     })
 
     setBlogs(blogsUpdated.sort((a, b) => b.likes - a.likes))
   }
 
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     await blogServices.remove(id)
-    setBlogs(blogs.filter(blog => blog.id !== id))
+    setBlogs(blogs.filter((blog) => blog.id !== id))
   }
 
   useEffect(() => {
@@ -74,12 +74,14 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if(user) {
-      blogServices.getAll().then(blogs => setBlogs(blogs.sort((a, b) => b.likes - a.likes)))
+    if (user) {
+      blogServices
+        .getAll()
+        .then((blogs) => setBlogs(blogs.sort((a, b) => b.likes - a.likes)))
     }
   }, [user])
 
-  if(user) {
+  if (user) {
     return (
       <>
         <div>
@@ -93,29 +95,47 @@ const App = () => {
 
         <div>
           <h2>blogs</h2>
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} currentUserId={user.id} onUpdate={handleUpdate} onDelete={handleDelete} />
-          )}
+          {blogs.map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              currentUserId={user.id}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
         </div>
       </>
     )
   }
 
-  if(!user) {
+  if (!user) {
     return (
       <>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          {loginError && <Notification type={'error'} message={loginError} /> }
+          {loginError && <Notification type={'error'} message={loginError} />}
 
           <div>
             <label htmlFor="username">Username</label>
-            <input id="username" name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            <input
+              id="username"
+              name="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
 
           <div>
             <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
           <div>
